@@ -7,13 +7,16 @@ import com.ufes.ordenacao.service.MetodosOrdenacaoService;
 import com.ufes.ordenacao.model.Resultado;
 import com.ufes.ordenacao.view.OrdenacaoView;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,38 +55,65 @@ public class PrincipalPresenter {
     
     private void setBtnCarregarArquivo(){
         this.ordenacaoView.getBtnCarregarArquivo().addActionListener(e -> {
+            this.path = null;
             selecionarArquivo();
-            if (this.path != null){
-                try {
+            try {
+                this.numerosSemOrdem = new ArrayList<>()
+                        ;
+                removeElementsList(
+                    this.ordenacaoView.getLstSemOrdem()
+                );
+                
+                this.numerosSemOrdem = this.leitorArquivoService.processarArquivo(this.path);
+              
+                setListModel(
+                    this.numerosSemOrdem, 
+                    this.ordenacaoView.getLstSemOrdem()
+                );
+                this.ordenacaoView.getBtnOrdenar().setEnabled(true);
+
+            }catch(FileNotFoundException fne){
+                JOptionPane.showMessageDialog(
+                    new JFrame(), 
+                    "Arquivo não existe", 
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }catch(IOException ioe){
+                JOptionPane.showMessageDialog(
+                    new JFrame(), 
+                    "Falha na leitura do arquivo", 
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE
+                );
+            } catch (Exception ex) {
+               JOptionPane.showMessageDialog(
+                    new JFrame(), 
+                    "Falha na leitura do arquivo", 
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }finally{ 
+                if (path == null || this.numerosSemOrdem.isEmpty()){
                     this.numerosSemOrdem = new ArrayList<>();
-                    
                     removeElementsList(
                         this.ordenacaoView.getLstSemOrdem()
                     );
-                    
-                    this.numerosSemOrdem = this.leitorArquivoService.processarArquivo(this.path);
-                    
-                    setListModel(
-                        this.numerosSemOrdem, 
-                        this.ordenacaoView.getLstSemOrdem()
+                
+                    JOptionPane.showMessageDialog(
+                        new JFrame(), 
+                        "Arquivo não existe", 
+                        "Erro", 
+                        JOptionPane.ERROR_MESSAGE
                     );
-                    
-                    this.ordenacaoView.getBtnOrdenar().setEnabled(true);
-                    
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(
-                            "Erro: arquivo com formato inválido"
-                    );
-                } catch (Exception ex) {
-                    Logger.getLogger(PrincipalPresenter.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } 
+            }
+            
         });
     }
     
     private void setBtnOrdenar(){
         this.ordenacaoView.getBtnOrdenar().addActionListener(e -> {
-            System.out.println(getMetodoOrdenacao());
             
             this.numerosOrdenados = new ArrayList<>();
             
@@ -158,7 +188,7 @@ public class PrincipalPresenter {
             this.numerosSemOrdem, 
             ordem
         );
-  
+        
     }
     
 }

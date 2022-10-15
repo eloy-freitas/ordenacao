@@ -5,6 +5,8 @@
 package com.ufes.ordenacao.business.leitor_arquivo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,20 +32,19 @@ public abstract class AbstractLeitorArquivoHandler implements LeitorArquivoHandl
     };
 
     @Override
-    public final List<Double> handlerRequest(String path) throws Exception {
+    public final List<Double> handlerRequest(String path) throws FileNotFoundException, IOException{
         if(verificarArquivo(path)){
             this.numerosSemOrdem = processarArquivo(path);
             return this.numerosSemOrdem;
         }else if(this.proximo != null){
             return proximo.handlerRequest(path);
-        }else{
-            throw new Exception("Não foi possível processar arquivo.");
-        }
+        }else
+            return null;
     }
     
        
-    public abstract List<Double> processarArquivo(String path);
+    public abstract List<Double> processarArquivo(String path) throws FileNotFoundException, IOException ;
     
-    public abstract boolean verificarArquivo(String path);
+    public abstract boolean verificarArquivo(String path) throws FileNotFoundException;
     
 }
