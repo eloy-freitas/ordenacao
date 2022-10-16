@@ -1,24 +1,9 @@
 
 package com.ufes.ordenacao;
 
-import com.ufes.ordenacao.business.leitor_arquivo.LeitorArquivoCsvHandler;
-import com.ufes.ordenacao.business.leitor_arquivo.LeitorArquivoProcessor;
-import com.ufes.ordenacao.business.leitor_arquivo.LeitorArquivoTxtHandler;
-import com.ufes.ordenacao.business.metodos_ordenacao.BubbleSortStrategy;
-import com.ufes.ordenacao.business.metodos_ordenacao.MetodoOrdenacaoStrategy;
-import com.ufes.ordenacao.model.Resultado;
-import com.ufes.ordenacao.business.metodos_ordenacao.SelectionSortStrategy;
-import com.ufes.ordenacao.presenter.PrincipalPresenter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-/**
- *
- * @author eloy
- */
+import com.ufes.ordenacao.presenter.PrincipalPresenter;
+
 public class Ordenacao {
 
     public static void main(String[] args) {
