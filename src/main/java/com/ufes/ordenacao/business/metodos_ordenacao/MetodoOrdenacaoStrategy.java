@@ -12,9 +12,9 @@ public abstract class MetodoOrdenacaoStrategy {
     
     public abstract Resultado ordenarCrescente(List<Double> valores);
     
-   public abstract Resultado ordenarDecrescente(List<Double> valores);
+    public abstract Resultado ordenarDecrescente(List<Double> valores);
 
-    public String getNome() {
+    public final String getNome() {
         return nome;
     }
         

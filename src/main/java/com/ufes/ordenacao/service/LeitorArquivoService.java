@@ -17,7 +17,7 @@ public class LeitorArquivoService {
         this.arquivoProcessor.addLeitorArquivoHandler(new LeitorArquivoTxtHandler());
     }
     
-    public List<Double> processarArquivo(String path)  throws FileNotFoundException, IOException, Exception{
+    public List<Double> processarArquivo(String path) throws FileNotFoundException, IOException, Exception{
         return  arquivoProcessor.handleRequest(path);
     }
     
