@@ -12,7 +12,7 @@ import java.util.List;
  * @author eloy
  */
 public abstract class MetodoOrdenacaoStrategy {
-    private String nome;
+    private final String nome;
     
     public MetodoOrdenacaoStrategy(String nome){
         this.nome = nome;

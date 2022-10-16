@@ -1,6 +1,8 @@
 
 package com.ufes.ordenacao.business.leitor_arquivo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public class LeitorArquivoProcessor {
@@ -19,7 +21,7 @@ public class LeitorArquivoProcessor {
         sucessor = leitorArquivoHandler;
     }
     
-    public List<Double> handleRequest(String path) throws Exception{
+    public List<Double> handleRequest(String path) throws FileNotFoundException, IOException{
         return this.first.handlerRequest(path);
     }
 }
