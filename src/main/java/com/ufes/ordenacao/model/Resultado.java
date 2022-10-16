@@ -7,6 +7,7 @@ package com.ufes.ordenacao.model;
 import java.util.List;
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 /**
  *
  * @author eloy
@@ -14,9 +15,9 @@ import java.time.format.DateTimeFormatter;
 public class Resultado {
     
     public List<Double> numeros;
-    public Duration tempo;
+    public Long tempo;
 
-    public Resultado(List<Double> numeros, Duration tempo) {
+    public Resultado(List<Double> numeros, Long tempo) {
         this.numeros = numeros;
         this.tempo = tempo;
     }
@@ -26,8 +27,8 @@ public class Resultado {
     }
 
     public String getTempo() {
-        double seconds = this.tempo.toMillis()/ Math.pow(10, 3);
-        String result = String.format("%05f segundos", seconds);
+        double seconds = this.tempo/Math.pow(10, 9);
+        String result = String.format("%,.9f segundos", seconds);
         return result;
         
     }
