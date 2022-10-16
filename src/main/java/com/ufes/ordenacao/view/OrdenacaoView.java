@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.ufes.ordenacao.view;
 
 import java.awt.List;
@@ -9,14 +5,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 
-/**
- *
- * @author eloy
- */
+
 public class OrdenacaoView extends javax.swing.JFrame {
 
     /**

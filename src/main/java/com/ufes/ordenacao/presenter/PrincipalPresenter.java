@@ -10,28 +10,19 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author eloy
- */
+
 public class PrincipalPresenter {
     private OrdenacaoView ordenacaoView;
     private String path;
     private LeitorArquivoService leitorArquivoService;
     private List<Double> numerosSemOrdem;
     private List<Double> numerosOrdenados;
-    private DefaultListModel listModelSemOrdem;
-    private DefaultListModel listModelOrdenados;
     private MetodosOrdenacaoService metodosOrdenacao;
-    private MetodoOrdenacaoStrategy metodo;
     private Resultado resultado;
     
     public PrincipalPresenter(){
@@ -146,10 +137,7 @@ public class PrincipalPresenter {
         this.numerosOrdenados = new ArrayList<>();
         this.ordenacaoView = new OrdenacaoView();
         this.path = null;
-        this.listModelSemOrdem = new DefaultListModel();
-        this.listModelOrdenados = new DefaultListModel();
         this.metodosOrdenacao = new MetodosOrdenacaoService();
-        this.metodo = new BubbleSortStrategy();
         removeElementsList(this.ordenacaoView.getLstSemOrdem());
         removeElementsList(this.ordenacaoView.getLstOrdenados());
         this.ordenacaoView.getCmbMetodo().removeAllItems();
