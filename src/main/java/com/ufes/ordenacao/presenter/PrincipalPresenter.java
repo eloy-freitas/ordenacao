@@ -57,58 +57,59 @@ public class PrincipalPresenter {
         this.ordenacaoView.getBtnCarregarArquivo().addActionListener(e -> {
             this.path = null;
             selecionarArquivo();
-            try {
-                this.numerosSemOrdem = new ArrayList<>()
-                        ;
-                removeElementsList(
-                    this.ordenacaoView.getLstSemOrdem()
-                );
-                
-                this.numerosSemOrdem = this.leitorArquivoService.processarArquivo(this.path);
-              
-                setListModel(
-                    this.numerosSemOrdem, 
-                    this.ordenacaoView.getLstSemOrdem()
-                );
-                this.ordenacaoView.getBtnOrdenar().setEnabled(true);
-
-            }catch(FileNotFoundException fne){
-                JOptionPane.showMessageDialog(
-                    new JFrame(), 
-                    "Arquivo não existe", 
-                    "Erro", 
-                    JOptionPane.ERROR_MESSAGE
-                );
-            }catch(IOException ioe){
-                JOptionPane.showMessageDialog(
-                    new JFrame(), 
-                    "Falha na leitura do arquivo", 
-                    "Erro", 
-                    JOptionPane.ERROR_MESSAGE
-                );
-            } catch (Exception ex) {
-               JOptionPane.showMessageDialog(
-                    new JFrame(), 
-                    "Falha na leitura do arquivo", 
-                    "Erro", 
-                    JOptionPane.ERROR_MESSAGE
-                );
-            }finally{ 
-                if (path == null || this.numerosSemOrdem.isEmpty()){
-                    this.numerosSemOrdem = new ArrayList<>();
+            if(path != null){
+               try {
+                    this.numerosSemOrdem = new ArrayList<>()
+                            ;
                     removeElementsList(
                         this.ordenacaoView.getLstSemOrdem()
                     );
-                
+
+                    this.numerosSemOrdem = this.leitorArquivoService.processarArquivo(this.path);
+
+                    setListModel(
+                        this.numerosSemOrdem, 
+                        this.ordenacaoView.getLstSemOrdem()
+                    );
+                    this.ordenacaoView.getBtnOrdenar().setEnabled(true);
+
+                }catch(FileNotFoundException fne){
                     JOptionPane.showMessageDialog(
                         new JFrame(), 
                         "Arquivo não existe", 
                         "Erro", 
                         JOptionPane.ERROR_MESSAGE
                     );
+                }catch(IOException ioe){
+                    JOptionPane.showMessageDialog(
+                        new JFrame(), 
+                        "Falha na leitura do arquivo", 
+                        "Erro", 
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(
+                        new JFrame(), 
+                        "Falha na leitura do arquivo", 
+                        "Erro", 
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }finally{ 
+                    if (this.numerosSemOrdem.isEmpty()){
+                        this.numerosSemOrdem = new ArrayList<>();
+                        removeElementsList(
+                            this.ordenacaoView.getLstSemOrdem()
+                        );
+
+                        JOptionPane.showMessageDialog(
+                            new JFrame(), 
+                            "Arquivo de formato inválido", 
+                            "Erro", 
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                    }
                 }
-            }
-            
+            }         
         });
     }
     
