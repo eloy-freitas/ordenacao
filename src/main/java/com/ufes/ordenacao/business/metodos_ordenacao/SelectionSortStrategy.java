@@ -21,7 +21,7 @@ public class SelectionSortStrategy extends MetodoOrdenacaoStrategy{
 
     @Override
     public Resultado ordenarCrescente(List<Double> valores) {
-        Instant start = Instant.now();
+       long inicio = System.nanoTime();
         int tamanho = valores.size();
         double menorValor = 0;
         int index = 0;
@@ -36,17 +36,16 @@ public class SelectionSortStrategy extends MetodoOrdenacaoStrategy{
             valores.set(index, valores.get(i));  
             valores.set(i, menorValor);  
         }    
-        Instant end = Instant.now();
-        Duration tempoExecuacao = Duration.between(
-             start,
-             end
-        );
-       return new Resultado(valores, tempoExecuacao);
+        long fim = System.nanoTime();
+    
+        long duracao = fim - inicio;
+
+        return new Resultado(valores, duracao);
     }
 
     @Override
     public Resultado ordenarDecrescente(List<Double> valores) {
-        Instant start = Instant.now();
+       long inicio = System.nanoTime();
         int tamanho = valores.size() - 1;
         double menorValor = 0;
         int index = 0;
@@ -61,12 +60,11 @@ public class SelectionSortStrategy extends MetodoOrdenacaoStrategy{
             valores.set(index, valores.get(i));  
             valores.set(i, menorValor);  
         }    
-        Instant end = Instant.now();
-        Duration tempoExecuacao = Duration.between(
-             start,
-             end
-        );
-        return new Resultado(valores, tempoExecuacao);
+         long fim = System.nanoTime();
+    
+       long duracao = fim - inicio;
+       
+       return new Resultado(valores, duracao);
     }
     
 }
